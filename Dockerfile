@@ -7,11 +7,10 @@ RUN apt-get update && apt-get install -y\
         libncurses5-dev git
 
 RUN mkdir /root/cgminer
-
-WORKDIR /root/cgminer
 RUN git clone https://github.com/ckolivas/cgminer.git /root/cgminer
-RUN ./autogen.sh
-RUN CFLAGS="-O2 -Wall -march=native" ./configure --enable-icarus
-RUN make
+RUN cd /root/cgminer; ./autogen.sh
+RUN cd /root/cgminer; CFLAGS="-O2 -Wall -march=native" ./configure --enable-icarus
+RUN cd /root/cgminer;make
+
 
 CMD /bin/bash
